@@ -2,6 +2,7 @@ const path = require("path");
 
 const express = require("express");
 const app = express();
+
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const { error } = require("console");
@@ -58,23 +59,23 @@ app.get("/welcome", (req, res, next) => {
 
 app.param("id", (req, res, next, id) => {
   console.log("Params called:", id);
-  //   if(id )
+  // if(id )
   next();
 });
 
 app.get("/story/:id", (req, res, next) => {
-  res.send(`<h1>Story ${req.params.storyId}</h1>`);
+  res.send(`<h1>Story ${req.params.id}</h1>`);
 });
 
 app.get("/statement", (req, res, next) => {
   res.download(
     path.join(__dirname, "userStatements/BankStatementChequing.png")
   );
-  if (error) {
-    if (!res.headersSent) {
-      res.redirect("/download/error");
-    }
-  }
+  //   if (error) {
+  //     if (!res.headersSent) {
+  //       res.redirect("/download/error");
+  //     }
+  //   }
   //   res.json({ msg: "test" });
 });
 
