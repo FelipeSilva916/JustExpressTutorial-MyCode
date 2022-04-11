@@ -10,6 +10,15 @@ app.get("/", (req, res) => {
   res.send(`<h1>Welcome To The 🏡 GET Page`);
 });
 
+const router = express.Router();
+
+// router.get("/:name", (req, res) => {
+//   console.log("working");
+//   res.send("works");
+// });
+
+// app.use("/colors", router);
+
 app.put("/", (req, res) => {});
 app.post("/", (req, res) => {
   res.send(`<h1>Welcome To The 🏡 POST Page`);
