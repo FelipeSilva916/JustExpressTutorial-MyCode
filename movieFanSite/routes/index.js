@@ -7,20 +7,20 @@ const apiBaseUrl = "http://api.themoviedb.org/3";
 const nowPlayingUrl = `${apiBaseUrl}/movie/now_playing?api_key=${apiKey}`;
 const imageBaseUrl = "http://image.tmdb.org/t/p/w300";
 
+router.use((req, res, next) => {
+  res.locals.imageBaseUrl - imageBaseUrl;
+  next();
+});
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   request.get(nowPlayingUrl, (err, response, movieData) => {
-    // console.log("Error =======", err);
-    // console.log("Response======", response);
-    // console.log(movieData);
     const parsedData = JSON.parse(movieData);
-    // console.log(parsedData);
-    // res.json(parsedData);
+
     res.render("index", {
       parsedData: parsedData.results,
     });
   });
-  // res.render("index", { title: "Express" });
 });
 
 module.exports = router;

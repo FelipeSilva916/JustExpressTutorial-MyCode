@@ -10,10 +10,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <% parsedData.forEach(movie => { %> <%= movie.title %> <% }); %>
-          <h1></h1>
+          <h1>Now Playing!</h1>
         </div>
-        <div class="col-sm-12"></div>
+        <% parsedData.forEach(movie => { %>
+        <div class="col-md-3 col-sm-4 poster">
+          <img src="<%= imageBaseUrl + movie.poster_path %>" />
+        </div>
+        <% }) %>
       </div>
     </div>
   </body>
