@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const request = require("request");
+const { response } = require("../app");
 
 const apiKey = "1fb720b97cc13e580c2c35e1138f90f8";
 // const apiKey = '123456789';
@@ -21,6 +22,18 @@ router.get("/", function (req, res, next) {
 
     res.render("index", {
       parsedData: parsedData.results
+    });
+  });
+});
+
+router.get("/movie/:id", (req, res) => {
+  const { id } = req.params;
+  const thisMovieUrl = `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
+
+  request.get(thisMovieUrl, (error, response, movieData) => {
+    const parsedData = JSON.parse(movieData);
+    res.render("single-movie", {
+      parsedData
     });
   });
 });
