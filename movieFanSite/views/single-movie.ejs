@@ -44,7 +44,12 @@
 		<p> <%= parsedData.budget  %> </p>
 		<p><%= parsedData.revenue %> </p>
 		<p><%= parsedData.releaseDate %> </p>
-		<p><%= parsedData.production_companies[0].name %> </p>
+		<ul>
+			<% parsedData.production_companies.forEach((company) => { %>
+			<li> <%= company.name %> </li>
+		<% }) %>
+
+		</ul>
 
 		Budget
 

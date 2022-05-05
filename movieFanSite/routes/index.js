@@ -21,7 +21,7 @@ router.get("/", function (req, res, next) {
     const parsedData = JSON.parse(movieData);
 
     res.render("index", {
-      parsedData: parsedData.results
+      parsedData: parsedData.results,
     });
   });
 });
@@ -33,9 +33,19 @@ router.get("/movie/:id", (req, res) => {
   request.get(thisMovieUrl, (error, response, movieData) => {
     const parsedData = JSON.parse(movieData);
     res.render("single-movie", {
-      parsedData
+      parsedData,
     });
   });
 });
 
+router.post("/search", (req, res) => {
+  const userSearchTerm = encodeURI(req.body.movieSearch);
+  const category = req.body.cat;
+  const movieUrl = `${apiBaseUrl}/search/${category}?query=${userSearchTerm}&api_key=${apiKey}`;
+
+  request.get(movieUrl, (error, response, movieData) => {
+    const parsedData = JSON.parse(movieData);
+    res.json(parsedData);
+  });
+});
 module.exports = router;
