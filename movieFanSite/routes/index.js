@@ -4,6 +4,7 @@ const request = require("request");
 const { response } = require("../app");
 
 const apiKey = "1fb720b97cc13e580c2c35e1138f90f8";
+
 // const apiKey = '123456789';
 const apiBaseUrl = "http://api.themoviedb.org/3";
 // const apiBaseUrl = 'http://localhost:3030';
@@ -21,7 +22,7 @@ router.get("/", function (req, res, next) {
     const parsedData = JSON.parse(movieData);
 
     res.render("index", {
-      parsedData: parsedData.results,
+      parsedData: parsedData.results
     });
   });
 });
@@ -33,7 +34,7 @@ router.get("/movie/:id", (req, res) => {
   request.get(thisMovieUrl, (error, response, movieData) => {
     const parsedData = JSON.parse(movieData);
     res.render("single-movie", {
-      parsedData,
+      parsedData
     });
   });
 });
@@ -44,8 +45,13 @@ router.post("/search", (req, res) => {
   const movieUrl = `${apiBaseUrl}/search/${category}?query=${userSearchTerm}&api_key=${apiKey}`;
 
   request.get(movieUrl, (error, response, movieData) => {
-    const parsedData = JSON.parse(movieData);
-    res.json(parsedData);
+    let parsedData = JSON.parse(movieData);
+    if (category === "person") {
+      parsedData.results = parsedData.results[0].known_for;
+    }
+    res.render("index", {
+      parsedData: parsedData.results
+    });
   });
 });
 module.exports = router;
