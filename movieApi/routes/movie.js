@@ -3,7 +3,7 @@ var router = express.Router();
 
 //big movie array
 
-/* GET home page. */
+/* GET movie page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });

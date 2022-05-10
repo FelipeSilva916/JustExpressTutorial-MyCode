@@ -8,7 +8,7 @@ const helmet = require("helmet");
 //now playing
 var indexRouter = require("./routes/index");
 //movies
-var movieRouter = require("./routes/movie");
+const movieRouter = require("./routes/movie");
 //search
 const searchRouter = require("./routes/search");
 
