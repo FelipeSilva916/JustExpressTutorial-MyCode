@@ -31,6 +31,16 @@ var app = express();
 //   })
 // );
 
+app.use((req, res, next) => {
+  //cut off response if API key is invalid
+  if (req.query.api_key != 123456789) {
+    res.status(401); //unauthorized =401
+    res.json("Invalid API Key");
+  } else {
+    next();
+  }
+});
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
