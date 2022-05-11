@@ -7,13 +7,13 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 var app = express();
-const helmet = require("helmet");
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false
-  })
-);
+// const helmet = require("helmet");
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: false,
+//     crossOriginEmbedderPolicy: false
+//   })
+// );
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
