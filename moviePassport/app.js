@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 //
 //=============== Passport Files =====================//
+const session = require("express-session");
 const passport = require("passport");
 const GitHubStrategy = require("passport-github").Strategy;
 //===================================================//
@@ -21,7 +22,19 @@ var app = express();
 //   })
 // );
 // ============== Passport Config ===================//
+app.use(
+  session({
+    secret: "Glacier",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 const passportConfig = require("./config");
+
 passport.use(
   new GitHubStrategy(passportConfig, function (
     accessToken,
@@ -29,9 +42,17 @@ passport.use(
     profile,
     cb
   ) {
-    console.log(profile);
+    return cb(null, profile);
   })
 );
+
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

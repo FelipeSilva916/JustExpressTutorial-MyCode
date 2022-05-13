@@ -26,7 +26,19 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/login", passport.authenticate("github"));
-
+//
+router.get("/favorites", (req, res) => {
+  res.json(req.user);
+});
+//
+router.get(
+  "/auth",
+  passport.authenticate("github", {
+    successRedirect: "/",
+    failureRedirect: "/loginFailed"
+  })
+);
+//
 router.get("/movie/:id", (req, res) => {
   const { id } = req.params;
   const thisMovieUrl = `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
