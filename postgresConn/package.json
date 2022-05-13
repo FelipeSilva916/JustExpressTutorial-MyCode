@@ -1,7 +1,6 @@
 {
   "name": "postgresconn",
   "version": "1.0.0",
-  "description": "",
   "main": "pgconn.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "pg": "^7.5.0"
-  }
+    "pg": "^7.18.2"
+  },
+  "keywords": [],
+  "description": ""
 }
